@@ -32,6 +32,14 @@
           '';
         };
 
+        flash = pkgs.writeShellApplication {
+          name = "flash";
+          text = ''
+            echo "Compiling sofle pd"
+            qmk flash -kb keebart/sofle_choc_pro -km pd
+          '';
+        };
+
         pkgs = nixpkgs.legacyPackages.${system};
 
         qmk =
@@ -47,6 +55,7 @@
 
           setup
           compile
+          flash
         ];
       in {
         devShells.default = pkgs.mkShell {
